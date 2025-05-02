@@ -20,6 +20,8 @@ npm run build
 ```
 
 ## 功能說明
+[demo site](https://regg408.github.io/roulette.gitbub.io/)
+
 ![alt text](docimg/image.png)
 - 右側清單可新增或移除項目，左側轉盤會做相對應的改變
 - 點擊開始旋轉轉盤，轉速是隨機的
