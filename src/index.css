@@ -11,6 +11,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --roulette-width: 600px;
+  --roulette-height: 600px;
+
+  --item-list-height: 100%;
 }
 
 a {
@@ -18,6 +23,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -46,9 +52,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -59,10 +67,92 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
+}
+
+.app {
+  width: 100%;
+  justify-content: space-evenly;
+  margin: 10px;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  top: 60px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 80px solid #fff; /* Outline color */
+}
+
+.prevent-select {
+  /* Safari */
+  -webkit-user-select: none;
+  /* IE 10 and IE 11 */
+  -ms-user-select: none;
+  /* Standard syntax */
+  user-select: none;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.roulette {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.rouletteCircle {
+  position: relative;
+  border: 1px solid black;
+  padding: 0;
+  margin: 1em auto;
+  width: var(--roulette-width);
+  height: var(--roulette-height);
+  border-radius: 50%;
+  list-style: none;
+  overflow: hidden;
+}
+
+.rouletteLi {
+  position: absolute;
+  width: var(--roulette-width);
+  height: var(--roulette-height);
+}
+
+.rouletteText {
+  font-size: 24px;
+  text-shadow: -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.itemList {
+  /* height: var(--item-list-height); */
+  overflow-y: auto
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
