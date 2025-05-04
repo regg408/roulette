@@ -4,6 +4,7 @@ import { Roulette } from './component/roulette';
 import { ItemList } from './component/itemList';
 import { getRandomEasing } from './common/easing';
 import { LinkBar } from './component/linkBar';
+import { VersionBanner } from './component/versionBanner';
 
 function App() {
 	const [degree, setDegree] = useState(0);
@@ -76,27 +77,34 @@ function App() {
 	};
 
 	return (
-		<div className="flex-row app">
-			<LinkBar />
+		<div className="flex-column app">
+			<div
+				className="flex-row"
+				style={{ justifyContent: "space-evenly" }}
+			>
+				<LinkBar />
 
-			<div>
-				<Roulette
-					degree={degree}
+				<div>
+					<Roulette
+						degree={degree}
+						list={list}
+					/>
+					<button
+						className='prevent-select'
+						onClick={startSpin}
+						disabled={isSpin}
+					>
+						ROLL
+					</button>
+				</div>
+
+				<ItemList
 					list={list}
+					onchange={onListUpdate}
 				/>
-				<button
-					className='prevent-select'
-					onClick={startSpin}
-					disabled={isSpin}
-				>
-					ROLL
-				</button>
 			</div>
 
-			<ItemList
-				list={list}
-				onchange={onListUpdate}
-			/>
+			<VersionBanner />
 		</div >
 	);
 }
