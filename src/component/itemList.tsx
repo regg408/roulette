@@ -16,7 +16,7 @@ export const ItemList = (props: ItemListProps) => {
 	const [itemName, setItemName] = useState<string>("");
 	const { list, onchange } = props;
 
-	const onAddClick = () => {
+	const addItem = () => {
 		if (itemName.trim() === "") {//空名檢查
 			window.alert("請輸入名稱!!");
 			return;
@@ -33,17 +33,28 @@ export const ItemList = (props: ItemListProps) => {
 		setItemName("");
 	};
 
+	const onTextBoxKeyDown = (ev: React.KeyboardEvent<HTMLInputElement>) => {
+		if (ev.key === "Enter") {//Enter新增
+			addItem();
+		}
+	};
+
+	const onAddClick = () => {
+		addItem();
+	};
+
 
 	return (
 		<div
 			className="flex-column"
 			style={{
-				justifyContent: "left"
+				width: "275px"
 			}}
 		>
 			<div
 				className="flex-row"
 				style={{
+					justifyContent: "space-between",
 					alignItems: "center"
 				}}
 			>
@@ -51,15 +62,20 @@ export const ItemList = (props: ItemListProps) => {
 					type="text"
 					placeholder="請輸入項目"
 					style={{
-						height: "100%"
+						height: "80%",
+						width: "75%"
 					}}
 					value={itemName}
 					onChange={(ele) => {
 						setItemName(ele.currentTarget.value);
 					}}
+					onKeyDown={onTextBoxKeyDown}
 				/>
 
-				<button onClick={onAddClick}>
+				<button
+					className="round-button"
+					onClick={onAddClick}
+				>
 					<img src={addIcon} alt="add" />
 				</button>
 			</div>
@@ -68,14 +84,21 @@ export const ItemList = (props: ItemListProps) => {
 
 			<div className="flex-column itemList">
 				{
-					list.map((ele, index) => {
+					list.map((eleName, index) => {
 						return (
 							<Item
 								key={`item-${index}`}
-								name={ele}
+								name={eleName}
+								list={list}
 								onDelete={() => {
 									const newList = [...list];
 									newList.splice(index, 1);
+									onchange(newList);
+								}}
+
+								onEditName={(newName) => {
+									const newList = [...list];
+									newList[index] = newName;
 									onchange(newList);
 								}}
 							/>
