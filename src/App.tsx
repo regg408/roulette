@@ -3,6 +3,7 @@ import './App.css';
 import { Roulette } from './component/roulette';
 import { ItemList } from './component/itemList';
 import { getRandomEasing } from './common/easing';
+import { LinkBar } from './component/linkBar';
 
 function App() {
 	const [degree, setDegree] = useState(0);
@@ -76,6 +77,8 @@ function App() {
 
 	return (
 		<div className="flex-row app">
+			<LinkBar />
+
 			<div>
 				<Roulette
 					degree={degree}

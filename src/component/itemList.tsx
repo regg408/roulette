@@ -88,7 +88,7 @@ export const ItemList = (props: ItemListProps) => {
 						onBlur={onTextBoxBlur}
 					/>
 					<button
-						className="round-button"
+						className="round"
 						onClick={onAddClick}
 					>
 						<img src={addIcon} alt="add" />

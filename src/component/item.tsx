@@ -106,7 +106,7 @@ export const Item = (props: ItemProps) => {
 
 			<div>
 				<button
-					className="round-button"
+					className="round"
 					onClick={() => {
 						setIsEdit(true);
 						setEditName(name);
@@ -115,7 +115,7 @@ export const Item = (props: ItemProps) => {
 					<img src={editIcon} alt="delete" />
 				</button>
 				<button
-					className="round-button"
+					className="round"
 					onClick={onDelete}
 				>
 					<img src={deleteIcon} alt="delete" />
