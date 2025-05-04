@@ -18,7 +18,7 @@ export const Roulette = (props: RouletteProps) => {
 	}).join(",")})`;
 
 	return (
-		<div className="prevent-select roulette">
+		<div className="prevent-select roulette-container">
 			<div className="triangle" />
 			<div
 				style={{
@@ -26,21 +26,19 @@ export const Roulette = (props: RouletteProps) => {
 				}}
 			>
 				<ul
-					className="rouletteCircle"
-					style={{
-						background: background
-					}}
+					className="roulette-circle"
+					style={{ background: background }}
 				>
 					{
 						//文字
 						list.map((item, index) => {
 							return (
 								<li
-									className="rouletteLi"
+									className="roulette-li"
 									key={`roulette-${index}`}
 								>
 									<div
-										className="rouletteText"
+										className="roulette-text"
 										style={{
 											width: "100%",
 											height: "100%",

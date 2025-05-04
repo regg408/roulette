@@ -13,17 +13,18 @@ interface ItemListProps {
  * @returns 
  */
 export const ItemList = (props: ItemListProps) => {
-	const [itemName, setItemName] = useState<string>("");
 	const { list, onchange } = props;
+	const [itemName, setItemName] = useState<string>("");
+	const [error, setError] = useState<string | null>(null);
 
 	const addItem = () => {
 		if (itemName.trim() === "") {//空名檢查
-			window.alert("請輸入名稱!!");
+			setError("請輸入名稱!!");
 			return;
 		}
 
 		if (list.includes(itemName)) {//名稱檢查
-			window.alert("名稱已存在!!");
+			setError("名稱已存在!!");
 			return;
 		}
 
@@ -33,16 +34,24 @@ export const ItemList = (props: ItemListProps) => {
 		setItemName("");
 	};
 
+	const onTextBoxChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+		setItemName(ev.currentTarget.value);
+		setError(null);
+	};
+
 	const onTextBoxKeyDown = (ev: React.KeyboardEvent<HTMLInputElement>) => {
 		if (ev.key === "Enter") {//Enter新增
 			addItem();
 		}
 	};
 
+	const onTextBoxBlur = () => {
+		setError(null);
+	};
+
 	const onAddClick = () => {
 		addItem();
 	};
-
 
 	return (
 		<div
@@ -51,38 +60,52 @@ export const ItemList = (props: ItemListProps) => {
 				width: "275px"
 			}}
 		>
+
 			<div
-				className="flex-row"
+				className="flex-column"
 				style={{
-					justifyContent: "space-between",
-					alignItems: "center"
+					position: "relative"
 				}}
 			>
-				<input
-					type="text"
-					placeholder="請輸入項目"
+				<div
+					className="flex-row"
 					style={{
-						height: "80%",
-						width: "75%"
+						justifyContent: "space-between",
+						alignItems: "center"
 					}}
-					value={itemName}
-					onChange={(ele) => {
-						setItemName(ele.currentTarget.value);
-					}}
-					onKeyDown={onTextBoxKeyDown}
-				/>
-
-				<button
-					className="round-button"
-					onClick={onAddClick}
 				>
-					<img src={addIcon} alt="add" />
-				</button>
+					<input
+						className="itemList-textBox"
+						type="text"
+						placeholder="請輸入項目"
+						style={{
+							border: error ? "1px solid red" : "1px solid white",
+							outline: error ? "red" : "white",
+						}}
+						value={itemName}
+						onChange={onTextBoxChange}
+						onKeyDown={onTextBoxKeyDown}
+						onBlur={onTextBoxBlur}
+					/>
+					<button
+						className="round-button"
+						onClick={onAddClick}
+					>
+						<img src={addIcon} alt="add" />
+					</button>
+				</div>
+				{
+					error && (
+						<div className="error-hint">
+							{error}
+						</div>
+					)
+				}
 			</div>
 
 			<br />
 
-			<div className="flex-column itemList">
+			<div className="flex-column itemList-list">
 				{
 					list.map((eleName, index) => {
 						return (

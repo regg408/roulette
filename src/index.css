@@ -15,7 +15,13 @@
   --roulette-width: 600px;
   --roulette-height: 600px;
 
-  --item-list-height: 700px;
+  --itemList-textBox-width: 150px;
+  --itemList-textBox-height: 80%;
+
+  --itemList-list-height: 700px;
+
+  --item-textBox-width: 150px;
+  --item-textBox-height: 80%;
 }
 
 a {
@@ -119,14 +125,14 @@ button:focus-visible {
   flex-direction: column;
 }
 
-.roulette {
+.roulette-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   pointer-events: none;
 }
 
-.rouletteCircle {
+.roulette-circle {
   position: relative;
   border: 1px solid black;
   padding: 0;
@@ -138,13 +144,13 @@ button:focus-visible {
   overflow: hidden;
 }
 
-.rouletteLi {
+.roulette-li {
   position: absolute;
   width: var(--roulette-width);
   height: var(--roulette-height);
 }
 
-.rouletteText {
+.roulette-text {
   font-size: 24px;
   text-shadow: -1px -1px 0 #000,
     1px -1px 0 #000,
@@ -152,15 +158,33 @@ button:focus-visible {
     1px 1px 0 #000;
 }
 
-.itemList {
-  height: var(--item-list-height);
+.itemList-textBox {
+  width: var(--itemList-textBox-width);
+  height: var(--itemList-textBox-height);
+}
+
+.itemList-list {
+  height: var(--itemList-list-height);
   overflow-y: auto
 }
 
-.item {
+.item-container {
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
   align-items: center;
+}
+
+.item-textBox {
+  width: var(--item-textBox-width);
+  height: var(--item-textBox-height);
+}
+
+.error-hint {
+  position: absolute;
+  bottom: -12px;
+  color: red;
+  font-size: 12px;
+  text-align: left;
 }
