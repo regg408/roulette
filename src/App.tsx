@@ -1,15 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import './App.css';
 import { Roulette } from './component/roulette';
 import { ItemList } from './component/itemList';
 import { getRandomEasing } from './common/easing';
 import { LinkBar } from './component/linkBar';
 import { VersionBanner } from './component/versionBanner';
+import { Modal } from './component/modal';
 
 function App() {
 	const [degree, setDegree] = useState(0);
 	const [isSpin, setIsSpin] = useState(false);
 	const [list, setList] = useState<string[]>(JSON.parse(localStorage.getItem("list") ?? "null") ?? ["Hello", "World"]);
+	const [showModal, setShowModal] = useState<boolean>(false);
+	const [result, setResult] = useState<string>("");
 	const speedFactor = useRef<number>(0);
 	const weight = useRef<number>(0);
 	const degreeIntervalId = useRef<number | null>(null);
@@ -29,20 +31,21 @@ function App() {
 		};
 	}, []);
 
-	const onListUpdate = (newList: string[]) => {
-		setList([...newList]);
-		localStorage.setItem("list", JSON.stringify(newList));
-	};
-
 	useEffect(() => {
 		if (!isSpin && degreeIntervalId.current) {
 			window.clearInterval(degreeIntervalId.current);
 			degreeIntervalId.current = null;
 			//計算出輪盤指到的項目，並顯示
 			const targetIndex = Math.floor((360 - degree) / (360 / list.length));
-			window.alert(list[targetIndex]);
+			setResult(list[targetIndex]);
+			setShowModal(true);
 		}
 	}, [degree, isSpin, list]);
+
+	const onListUpdate = (newList: string[]) => {
+		setList([...newList]);
+		localStorage.setItem("list", JSON.stringify(newList));
+	};
 
 	const startSpin = () => {
 		setIsSpin(true);
@@ -53,9 +56,10 @@ function App() {
 			setDegree((deg) => (deg + speedFactor.current * weight.current) % 360);
 		}, 1);
 
+		//轉1~2秒
 		window.setTimeout(() => {
 			stopSpin();
-		}, 1000);
+		}, 1000 + Math.random() * 1000);
 	};
 
 	const stopSpin = () => {
@@ -76,19 +80,25 @@ function App() {
 		}, 1);
 	};
 
+	const onCloseModal = () => {
+		setShowModal(false);
+	};
+
 	return (
-		<div className="flex-column app">
-			<div
-				className="flex-row"
-				style={{ justifyContent: "space-evenly" }}
-			>
+		<div
+			className="flex-column"
+			style={{
+				width: "100%",
+				minWidth: "1000px",
+				justifyContent: "space-evenly",
+				margin: "10px",
+			}}
+		>
+			<div className="flex-row" style={{ justifyContent: "space-evenly" }}			>
 				<LinkBar />
 
 				<div>
-					<Roulette
-						degree={degree}
-						list={list}
-					/>
+					<Roulette degree={degree} list={list} />
 					<button
 						className='prevent-select'
 						onClick={startSpin}
@@ -98,13 +108,12 @@ function App() {
 					</button>
 				</div>
 
-				<ItemList
-					list={list}
-					onchange={onListUpdate}
-				/>
+				<ItemList list={list} onchange={onListUpdate} />
 			</div>
 
 			<VersionBanner />
+
+			<Modal show={showModal} text={result} onClose={onCloseModal} />
 		</div >
 	);
 }

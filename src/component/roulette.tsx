@@ -1,3 +1,5 @@
+import './roulette.css';
+
 interface RouletteProps {
 	degree: number;
 	list: string[];
@@ -19,32 +21,15 @@ export const Roulette = (props: RouletteProps) => {
 
 	return (
 		<div className="prevent-select roulette-container">
-			<div className="triangle" />
-			<div
-				style={{
-					transform: `rotate(${degree}deg)`
-				}}
-			>
-				<ul
-					className="roulette-circle"
-					style={{ background: background }}
-				>
+			<div className="roulette-triangle" />
+			<div style={{ transform: `rotate(${degree}deg)` }}>
+				<ul className="roulette-circle" style={{ background: background }}>
 					{
 						//文字
 						list.map((item, index) => {
 							return (
-								<li
-									className="roulette-li"
-									key={`roulette-${index}`}
-								>
-									<div
-										className="roulette-text"
-										style={{
-											width: "100%",
-											height: "100%",
-											transform: `rotate(${(index + 0.5) * (360 / list.length)}deg)`,
-										}}
-									>
+								<li className="roulette-li" key={`roulette-${index}`}>
+									<div className="roulette-text" style={{ transform: `rotate(${(index + 0.5) * (360 / list.length)}deg)` }}>
 										<br />
 										{item}
 									</div>

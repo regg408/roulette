@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import deleteIcon from './../assets/delete.svg';
 import editIcon from './../assets/edit.svg';
+import './item.css';
 
 interface ItemProps {
 	name: string;

@@ -1,0 +1,17 @@
+:root {
+	--item-textBox-width: 150px;
+	--item-textBox-height: 80%;
+}
+
+.item-container {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.item-textBox {
+	width: var(--item-textBox-width);
+	height: var(--item-textBox-height);
+}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import addIcon from './../assets/add.svg';
 import { Item } from './item';
+import addIcon from './../assets/add.svg';
+import './itemList.css';
 
 interface ItemListProps {
 	list: string[];

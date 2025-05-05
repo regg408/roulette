@@ -1,0 +1,16 @@
+:root {
+	--itemList-textBox-width: 150px;
+	--itemList-textBox-height: 80%;
+
+	--itemList-list-height: 700px;
+}
+
+.itemList-textBox {
+	width: var(--itemList-textBox-width);
+	height: var(--itemList-textBox-height);
+}
+
+.itemList-list {
+	height: var(--itemList-list-height);
+	overflow-y: auto
+}

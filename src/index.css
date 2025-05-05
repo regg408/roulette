@@ -11,40 +11,20 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  --roulette-width: 600px;
-  --roulette-height: 600px;
-
-  --itemList-textBox-width: 150px;
-  --itemList-textBox-height: 80%;
-
-  --itemList-list-height: 700px;
-
-  --item-textBox-width: 150px;
-  --item-textBox-height: 80%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: #535bf2;
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
 }
 
 body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
   min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
 }
 
 button {
@@ -75,38 +55,6 @@ button:focus-visible {
   padding: 0;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-.app {
-  width: 100%;
-  min-width: 1000px;
-  justify-content: space-evenly;
-  margin: 10px;
-}
-
-.triangle {
-  width: 0;
-  height: 0;
-  top: 60px;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 80px solid #fff;
-  /* Outline color */
-}
-
 .prevent-select {
   /* Safari */
   -webkit-user-select: none;
@@ -124,62 +72,6 @@ button:focus-visible {
 .flex-column {
   display: flex;
   flex-direction: column;
-}
-
-.roulette-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  pointer-events: none;
-}
-
-.roulette-circle {
-  position: relative;
-  border: 1px solid black;
-  padding: 0;
-  margin: 1em auto;
-  width: var(--roulette-width);
-  height: var(--roulette-height);
-  border-radius: 50%;
-  list-style: none;
-  overflow: hidden;
-}
-
-.roulette-li {
-  position: absolute;
-  width: var(--roulette-width);
-  height: var(--roulette-height);
-}
-
-.roulette-text {
-  font-size: 24px;
-  text-shadow: -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
-}
-
-.itemList-textBox {
-  width: var(--itemList-textBox-width);
-  height: var(--itemList-textBox-height);
-}
-
-.itemList-list {
-  height: var(--itemList-list-height);
-  overflow-y: auto
-}
-
-.item-container {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.item-textBox {
-  width: var(--item-textBox-width);
-  height: var(--item-textBox-height);
 }
 
 .error-hint {
