@@ -55,12 +55,7 @@ export const ItemList = (props: ItemListProps) => {
 	};
 
 	return (
-		<div
-			className="flex-column"
-			style={{
-				width: "275px"
-			}}
-		>
+		<div className='itemList-container'>
 
 			<div
 				className="flex-column"
@@ -104,7 +99,6 @@ export const ItemList = (props: ItemListProps) => {
 				}
 			</div>
 
-			<br />
 
 			<div className="flex-column itemList-list">
 				{

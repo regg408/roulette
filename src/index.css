@@ -14,18 +14,16 @@
 }
 
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  height: 100%;
 }
 
+html,
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-height: 100vh;
+  height: 100%;
 }
+
 
 button {
   border-radius: 8px;
@@ -64,6 +62,10 @@ button:focus-visible {
   user-select: none;
 }
 
+.prevent-pointer-events {
+  pointer-events: none;
+}
+
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -80,4 +82,27 @@ button:focus-visible {
   color: red;
   font-size: 12px;
   text-align: left;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app-func {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  height: 85%;
+}
+
+@media (max-width: 768px) or (orientation: portrait) {
+  .app-func {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
 }

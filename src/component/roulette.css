@@ -1,6 +1,18 @@
 :root {
-	--roulette-width: 600px;
-	--roulette-height: 600px;
+	--roulette-min-width: 500px;
+	--roulette-min-height: 500px;
+
+	--roulette-width: 60vh;
+	--roulette-height: 60vh;
+}
+
+.roulette-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
+	gap: 1rem;
 }
 
 .roulette-triangle {
@@ -12,37 +24,51 @@
 	border-top: 80px solid #fff;
 }
 
-.roulette-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	pointer-events: none;
+.roulette-div {
+	overflow: hidden;
+	min-width: var(--roulette-min-width);
+	min-height: var(--roulette-min-height);
 }
 
 .roulette-circle {
-	position: relative;
 	border: 1px solid black;
 	padding: 0;
-	margin: 1em auto;
+	margin: 0;
 	width: var(--roulette-width);
 	height: var(--roulette-height);
+	min-width: var(--roulette-min-width);
+	min-height: var(--roulette-min-height);
 	border-radius: 50%;
 	list-style: none;
-	overflow: hidden;
 }
 
 .roulette-li {
 	position: absolute;
 	width: var(--roulette-width);
 	height: var(--roulette-height);
+	min-width: var(--roulette-min-width);
+	min-height: var(--roulette-min-height);
 }
 
 .roulette-text {
-	width: 100%;
-	height: 100%;
+	padding-top: 1rem;
 	font-size: 24px;
 	text-shadow: -1px -1px 0 #000,
 		1px -1px 0 #000,
 		-1px 1px 0 #000,
 		1px 1px 0 #000;
+}
+
+@media (max-width: 767px) or (orientation: portrait) {
+	:root {
+		--roulette-width: 80vw;
+		--roulette-height: 80vw;
+
+		--roulette-min-width: none;
+		--roulette-min-height: none;
+	}
+
+	.roulette-triangle {
+		border-top: 50px solid #fff;
+	}
 }

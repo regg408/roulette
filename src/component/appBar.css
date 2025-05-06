@@ -1,0 +1,9 @@
+.appBar-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 75px;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
