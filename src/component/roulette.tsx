@@ -34,13 +34,13 @@ export const Roulette = (props: RouletteProps) => {
 	const startSpin = () => {
 		audioPLayer.playRollAudio();
 		setIsSpin(true);
-		speedFactor.current = 0.5 + Math.random() * 0.5;//隨機速度 0.5~1
+		speedFactor.current = 2 + Math.random() * 3;//隨機速度 2~5
 		weight.current = 1.0;
 
 		degreeIntervalId.current = window.setInterval(() => {
 			degreeRef.current = (degreeRef.current + speedFactor.current * weight.current) % 360;
 			setDegree(degreeRef.current);
-		}, 50);
+		}, 1);
 
 		//為何是1250，配合阿魯不妙曲BGM
 		window.setTimeout(() => { stopSpin(); }, 1250);
