@@ -94,23 +94,9 @@ export function easeInOutExpo(x: number): number {
 export function getRandomEasing(): (_: number) => number {
 	const easing = [
 		easeInCubic,
-		easeOutCubic,
-		easeInOutCubic,
 		easeInQuint,
-		easeOutQuint,
-		easeInOutQuint,
 		easeInCirc,
-		easeOutCirc,
-		easeInOutCirc,
 		easeInQuad,
-		easeOutQuad,
-		easeInOutQuad,
-		// easeInQuart, //效果不好
-		easeOutQuart,
-		easeInOutQuart,
-		// easeInExpo, //效果不好
-		easeOutExpo,
-		easeInOutExpo
 	];
 	return easing[Math.floor(easing.length * Math.random())];
 }

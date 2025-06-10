@@ -1,6 +1,7 @@
 import { RefObject, useRef, useState } from 'react';
 import './roulette.css';
 import { getRandomEasing } from '../common/easing';
+import audioPLayer from '../common/audioPlayer';
 
 interface RouletteProps {
 	degreeRef: RefObject<number>;
@@ -15,7 +16,6 @@ interface RouletteProps {
  */
 export const Roulette = (props: RouletteProps) => {
 	const { degreeRef, list, onStop } = props;
-
 	const [isSpin, setIsSpin] = useState(false);
 	const [degree, setDegree] = useState(degreeRef.current);
 
@@ -32,19 +32,18 @@ export const Roulette = (props: RouletteProps) => {
 
 
 	const startSpin = () => {
+		audioPLayer.playRollAudio();
 		setIsSpin(true);
-		speedFactor.current = 5 + Math.random() * 3;//隨機速度 5~8
+		speedFactor.current = 0.5 + Math.random() * 0.5;//隨機速度 0.5~1
 		weight.current = 1.0;
 
 		degreeIntervalId.current = window.setInterval(() => {
 			degreeRef.current = (degreeRef.current + speedFactor.current * weight.current) % 360;
 			setDegree(degreeRef.current);
-		}, 1);
+		}, 50);
 
-		//轉1~2秒
-		window.setTimeout(() => {
-			stopSpin();
-		}, 1000 + Math.random() * 1000);
+		//為何是1250，配合阿魯不妙曲BGM
+		window.setTimeout(() => { stopSpin(); }, 1250);
 	};
 
 	const stopSpin = () => {
@@ -55,6 +54,8 @@ export const Roulette = (props: RouletteProps) => {
 			weight.current = 1 - (easing(Math.min(time, 1)));
 
 			if (weight.current <= 0) {
+				audioPLayer.stopRollAudio();
+				audioPLayer.playResultAudio();
 				//當權重歸零時，停止旋轉
 				setIsSpin(false);
 				if (weightIntervalId.current) {
@@ -68,24 +69,30 @@ export const Roulette = (props: RouletteProps) => {
 
 	return (
 		<div className="roulette-container">
-			<div className="prevent-pointer-events roulette-triangle" />
-			<div className='roulette-div'> {/**避免旋轉導致長寬改變而出現scroll bar */}
-				<div className='prevent-pointer-events' style={{ transform: `rotate(${degree}deg)` }}>
-					<ul className="roulette-circle" style={{ background: background }}>
-						{
-							//文字
-							list.map((item, index) => {
-								return (
-									<li className="roulette-li" key={`roulette-${index}`} style={{ transform: `rotate(${(index + 0.5) * (360 / list.length)}deg)` }}>
-										<div className="roulette-text" >
-											{item}
-										</div>
-									</li>
-								);
-							})
-						}
-					</ul>
-				</div >
+			<div style={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center"
+			}}>
+				<div className="prevent-pointer-events roulette-triangle" />
+				<div className='roulette-div'> {/**避免旋轉導致長寬改變而出現scroll bar */}
+					<div className='prevent-pointer-events' style={{ transform: `rotate(${degree}deg)` }}>
+						<ul className="roulette-circle" style={{ background: background }}>
+							{
+								//文字
+								list.map((item, index) => {
+									return (
+										<li className="roulette-li" key={`roulette-${index}`} style={{ transform: `rotate(${(index + 0.5) * (360 / list.length)}deg)` }}>
+											<div className="roulette-text" >
+												{item}
+											</div>
+										</li>
+									);
+								})
+							}
+						</ul>
+					</div >
+				</div>
 			</div>
 
 			<button className='prevent-select' onClick={startSpin} disabled={isSpin}>

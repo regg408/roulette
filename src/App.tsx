@@ -10,12 +10,10 @@ function App() {
 	const [showModal, setShowModal] = useState<boolean>(false);
 	const [result, setResult] = useState<string>("");
 
-
 	const onListUpdate = (newList: string[]) => {
 		setList([...newList]);
 		localStorage.setItem("list", JSON.stringify(newList));
 	};
-
 
 	const onRouletteStop = () => {
 		const targetIndex = Math.floor((360 - degree.current) / (360 / list.length));
@@ -30,14 +28,10 @@ function App() {
 	return (
 		<div className="app-container">
 			<AppBar />
-
 			<div className="app-func">
 				<Roulette degreeRef={degree} list={list} onStop={onRouletteStop} />
-
 				<ItemList list={list} onchange={onListUpdate} />
 			</div>
-
-
 			<Modal show={showModal} text={result} onClose={onCloseModal} />
 		</div >
 	);

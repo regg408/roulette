@@ -31,3 +31,6 @@ npm run build
 ## 附錄
 - 緩動函數參考自: <https://easings.net/zh-tw#>
 - 圖示來自: <https://fonts.google.com/icons>
+- 音效來源
+  - [mixkit-retro-game-notification-212](https://mixkit.co/free-sound-effects/arcade/)
+  - [unwelcome-school-made-with-Voicemod](https://tuna.voicemod.net/sound/fef61d3f-2f2c-490b-959b-27a03ed48ba3)
