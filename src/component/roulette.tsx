@@ -1,4 +1,4 @@
-import { RefObject, useRef, useState } from 'react';
+import { RefObject, useMemo, useRef, useState } from 'react';
 import './roulette.css';
 import { getRandomEasing } from '../common/easing';
 import audioPLayer from '../common/audioPlayer';
@@ -25,11 +25,13 @@ export const Roulette = (props: RouletteProps) => {
 	const weightIntervalId = useRef<number | null>(null);
 
 	//建立輪盤顏色
-	const background = `conic-gradient(${list.map((_, index) => {
-		const hsl = `hsl(${index * 360 / list.length}, 100%, 50%)`;
-		return `${hsl} ${index * 360 / list.length}deg, ${hsl} ${(index + 1) * 360 / list.length}deg`;
-	}).join(",")})`;
-
+	const background = useMemo(() => {
+		console.log("update background");
+		return `conic-gradient(${list.map((_, index) => {
+			const hsl = `hsl(${index * 360 / list.length}, 100%, 50%)`;
+			return `${hsl} ${index * 360 / list.length}deg, ${hsl} ${(index + 1) * 360 / list.length}deg`;
+		}).join(",")})`;
+	}, [list]);
 
 	const startSpin = () => {
 		audioPLayer.playRollAudio();
